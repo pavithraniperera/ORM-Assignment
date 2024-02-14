@@ -14,7 +14,7 @@
 
 6)  String hql5 = "SELECT b FROM Book b WHERE author.country = :country";
 
-8)String hql6 = "SELECT a From Author a WHERE SIZE(a.books) > (SELECT AVG(SIZE(b.books)) FROM Author b)";
+8) String hql6 = "SELECT a From Author a WHERE SIZE(a.books) > (SELECT AVG(SIZE(b.books)) FROM Author b)";
 
 **EXPLANATIONs FOR ANNOTATIONS**
 
