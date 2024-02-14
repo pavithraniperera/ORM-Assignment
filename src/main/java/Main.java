@@ -25,6 +25,16 @@ public class Main {
             System.out.println(book.getTitle());
         }
 
+         //Question-02
+        String hql2 ="Update Book SET price = price*1.1 WHERE author.id = :id ";
+        Query query1 = session.createQuery(hql2);
+        query1.setParameter("id",1);
+        int i = query1.executeUpdate();
+        if (i>0){
+            System.out.println("updated");
+        }
+        
+
 
 
         transaction.commit();
