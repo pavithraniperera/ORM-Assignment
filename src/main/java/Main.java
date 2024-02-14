@@ -47,6 +47,38 @@ public class Main {
         Query query2 = session.createQuery(hql3);
         Double averagePrice = (Double) query2.uniqueResult();
         System.out.println("Average price of all Books " + averagePrice);
+
+         //Question-05
+      
+        String hql4 = "SELECT a, COUNT(b) FROM Author a LEFT JOIN a.books b GROUP BY a ";
+        Query query3 = session.createQuery(hql4);
+        List<Object[]> results = query3.list();
+        for (Object[] result : results) {
+            Author author = (Author) result[0];
+            Long bookCount = (Long) result[1];
+            System.out.println("Author: " + author.getName() + ", Book Count: " + bookCount);
+        }
+
+         //Question -06
+
+        String hql5 = "SELECT b FROM Book b WHERE author.country = :country";
+        Query query4 = session.createQuery(hql5);
+        query4.setParameter("country","SriLanka");
+        List<Book> books = query4.list();
+        for (Book book : books){
+            System.out.println(book.getTitle());
+        }
+
+        
+        //Question -08
+
+        String hql6 = "SELECT a From Author a WHERE SIZE(a.books) > (SELECT AVG(SIZE(b.books)) FROM Author b)";
+        Query query5 = session.createQuery(hql6);
+        List<Author> authors = query5.list();
+        for (Author author : authors){
+            System.out.println(author.getName());
+        }
+
         
 
 
