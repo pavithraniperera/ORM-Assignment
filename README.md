@@ -14,6 +14,8 @@
 
 6)  String hql5 = "SELECT b FROM Book b WHERE author.country = :country";
 
+8)String hql6 = "SELECT a From Author a WHERE SIZE(a.books) > (SELECT AVG(SIZE(b.books)) FROM Author b)";
+
 **EXPLANATIONs FOR ANNOTATIONS**
 
 01) @JoinColumn Annotation - An author can write many books, and a book belongs to one author. This is a one-to-many relationship.The Join Column annotation helps map this relationship in this code.  It tells to program which column in one table (e.g., author_id in Books) refers to the primary key (usually id) in the other table (Authors). This creates the link between them.
