@@ -33,6 +33,14 @@ public class Main {
         if (i>0){
             System.out.println("updated");
         }
+
+           //Question-03
+
+        Author author = session.get(Author.class, 2);
+        if (author != null) {
+            session.delete(author); // Delete the author
+            System.out.println(" deleted successfully!");
+        }
         
 
 
