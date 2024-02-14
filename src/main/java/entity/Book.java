@@ -13,7 +13,7 @@ public class Book {
     private Year publicationYear;
     private double price;
     @ManyToOne
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "author_id" ,referencedColumnName = "id")
     private Author author;
 
     public Book() {
