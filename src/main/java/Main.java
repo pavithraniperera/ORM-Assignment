@@ -41,6 +41,12 @@ public class Main {
             session.delete(author); // Delete the author
             System.out.println(" deleted successfully!");
         }
+
+          //Question-04
+        String hql3 = "SELECT AVG(price) FROM Book";
+        Query query2 = session.createQuery(hql3);
+        Double averagePrice = (Double) query2.uniqueResult();
+        System.out.println("Average price of all Books " + averagePrice);
         
 
 
