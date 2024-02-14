@@ -10,17 +10,21 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int id ;
     private String name;
+
+    private String country;
     @OneToMany(mappedBy = "author" , cascade = CascadeType.REMOVE)
+
     private List<Book> books;
 
     public Author() {
 
     }
 
-    public Author(int id, String name, List<Book> books) {
+    public Author(int id, String name, List<Book> books,String country) {
         this.id = id;
         this.name = name;
         this.books = books;
+        this.country = country;
     }
 
     public int getId() {
@@ -47,10 +51,19 @@ public class Author {
         this.books = books;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     @Override
     public String toString() {
         return "Author{" +
                 "id=" + id +
+                ", country " +country +
                 ", name='" + name + '\'' +
                 ", books=" + books +
                 '}';
