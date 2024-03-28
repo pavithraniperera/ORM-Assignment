@@ -1,4 +1,5 @@
 import config.FactoryConfiguration;
+import entity.Author;
 import entity.Book;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -14,7 +15,7 @@ public class Main {
         Transaction transaction = session.beginTransaction();
 
         // Question -01
-        String hql1 = "From Book WHERE publicationYear > :year";
+       String hql1 = "From Book WHERE publicationYear > :year";
 
         Query query = session.createQuery(hql1);
         query.setParameter("year", Year.of(2010));
@@ -33,6 +34,51 @@ public class Main {
         if (i>0){
             System.out.println("updated");
         }
+
+        //Question-03
+
+        Author author = session.get(Author.class, 2);
+        if (author != null) {
+            session.delete(author); // Delete the author
+            System.out.println(" deleted successfully!");
+        }
+
+        //Question-04
+        String hql3 = "SELECT AVG(price) FROM Book";
+        Query query2 = session.createQuery(hql3);
+        Double averagePrice = (Double) query2.uniqueResult();
+        System.out.println("Average price of all Books " + averagePrice);
+
+        //Question-05
+
+        String hql4 = "SELECT a, COUNT(b) FROM Author a LEFT JOIN a.books b GROUP BY a ";
+        Query query3 = session.createQuery(hql4);
+        List<Object[]> results = query3.list();
+        for (Object[] result : results) {
+            Author author1 = (Author) result[0];
+            Long bookCount = (Long) result[1];
+            System.out.println("Author: " + author1.getName() + ", Book Count: " + bookCount);
+        }
+
+        //Question -06
+
+        String hql5 = "SELECT b FROM Book b WHERE author.country = :country";
+        Query query4 = session.createQuery(hql5);
+        query4.setParameter("country","SriLanka");
+        List<Book> bookList = query4.list();
+        for (Book book : bookList){
+            System.out.println(book.getTitle());
+        }
+
+        //Question -08
+
+        String hql6 = "SELECT a From Author a WHERE SIZE(a.books) > (SELECT AVG(SIZE(b.books)) FROM Author b)";
+        Query query5 = session.createQuery(hql6);
+        List<Author> authors = query5.list();
+        for (Author author2 : authors){
+            System.out.println(author2.getName());
+        }
+
 
 
         transaction.commit();
